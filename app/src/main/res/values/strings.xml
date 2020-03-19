@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Noise Level</string>
+    <string name="status">Current status</string>
+</resources>
