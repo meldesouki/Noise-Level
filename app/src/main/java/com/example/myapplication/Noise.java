@@ -1,11 +1,15 @@
 package com.example.myapplication;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
 
 import com.example.myapplication.R;
 
@@ -53,10 +57,23 @@ public class Noise extends Activity {
         }
     }
 
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
-        startRecorder();
+       /* if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
+                    BuildDev.RECORD_AUDIO);
+
+        } else {
+            startRecorder();
+        }*/
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
+//            return
+        } else {
+            startRecorder();
+        }
     }
 
     public void onPause()
